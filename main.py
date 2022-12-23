@@ -52,7 +52,7 @@ class BlogPost(DynamicDocument):
 
 # Save a document
 
-
+# Primeira forma de usar
 # user = User(
 #     username="Higor Souza 4",
 #     email="higor.souza4@hotmail.com",
@@ -74,3 +74,116 @@ class BlogPost(DynamicDocument):
 # print("Done")
 
 
+# Segunda forma de usar
+
+user = User(
+    username="Higor Souza 5",
+    email="higor.souza5@hotmail.com",
+    password=os.urandom(16),
+    age=30,
+    bio="Hello Povo 5",
+)
+
+user.admin = True
+user.registered = True
+
+# try:
+#     user.save()
+# except NotUniqueError:
+#     print("Username or mail is not unique")
+
+# Querying database
+
+# users = User.objects()
+#
+# for user in users:
+#     print(user.username, user.email, user.bio)
+
+
+# Filtering
+# admin_users = User.objects(admin=True, registered=True)
+#
+# for a in admin_users:
+#     print(a.username)
+
+# try:
+#     higor = User.objects(username="HigorSouza").get()
+#     print(higor.username, higor.email)
+# except DoesNotExist:
+#     print("User not exist")
+
+# higor = User.objects(username="HigorSouza").get()
+#
+# posts = BlogPost.objects(author=higor)
+#
+# for post in posts:
+#     print(post.author.username)
+
+
+# Query operators
+
+# Less than & greater than
+
+# uuusers = User.objects(age__lt=30)
+# for user in uuusers:
+#     print(user.username, user.age)
+
+# user_older = User.objects(age__gte=30)
+# for user in user_older:
+#     print(user.username, user.age)
+
+# Query a list
+
+# posts_tagged_python = BlogPost.objects(tags="MongoEngine")
+# posts_tagged_python = BlogPost.objects(tags__in=["MongoEngine"])
+#
+# for post in posts_tagged_python:
+#     print(post.content)
+
+# String queries
+
+# python_posts = BlogPost.objects(content__icontains="MongoDB")
+#
+# for post in python_posts:
+#     print(post.content)
+
+# Limiting and skipping results
+
+# Get the first
+
+# first = BlogPost.objects().first()
+# print(first.title)
+
+# Get the first 2 documents
+# first_2 = BlogPost.objects()[:2]
+# for post in first_2:
+#     print(post.title)
+
+# Get the first 2 documents
+
+# all_but = BlogPost.objects()[2:]
+# for post in all_but:
+#     print(post.title)
+
+
+# sliced = BlogPost.objects()[2:4]
+# for post in sliced:
+#     print(post.title)
+
+# Counting
+
+# user_count = User.objects().count()
+# print(user_count)
+
+
+# Aggregation
+
+# average = BlogPost.objects.average("rating")
+# print(average)
+
+# total_rating = BlogPost.objects.sum("rating")
+# print(total_rating)
+
+
+# user = User.objects(username="HigorSouza").get()
+# print(user.json())
